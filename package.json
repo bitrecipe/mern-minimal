@@ -1,5 +1,5 @@
 {
-  "name": "react-ssr-14-3-2019",
+  "name": "mern-minimal",
   "version": "1.0.0",
   "description": "A simple MongoDB Express.js React Node.js (MERN) universal starter kit",
   "main": "index.js",
@@ -15,7 +15,15 @@
     "build:start:prod": "npm run clean:dist && npm run build:client && npm run build:server && npm run start:prod",
     "client:test": "jest --coverage || true"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitrecipe/mern-minimal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bitrecipe/mern-minimal/issues"
+  },
+  "private": true,
+  "author": "Subeesh M.M <subeeshmm.open@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.4.3",
