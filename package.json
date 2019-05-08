@@ -1,7 +1,7 @@
 {
   "name": "mern-minimal",
   "version": "1.0.0",
-  "description": "A simple MongoDB Express.js React Node.js (MERN) universal starter kit",
+  "description": "A simple MongoDB Express.js React.js Node.js (MERN) universal starter kit",
   "main": "index.js",
   "sideEffects": [
     "*.css"
