@@ -1,5 +1,5 @@
 # mern-minimal
-A simple MongoDB Express.js React Node.js (MERN) universal starter kit.
+A simple MongoDB Express.js React.js Node.js (MERN) universal starter kit.
 ### Requirement
   - Node.js v8+
   - MongoDB v3+
@@ -13,7 +13,7 @@ A simple MongoDB Express.js React Node.js (MERN) universal starter kit.
 * mongoose v5
 * webpack v4
 * enzyme v3
-* jest 24
+* jest v24
 * babel v7
 ### Getting Started
 ```sh
