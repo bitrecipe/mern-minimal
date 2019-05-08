@@ -15,6 +15,7 @@ A simple MongoDB Express.js React.js Node.js (MERN) universal starter kit.
 * enzyme v3
 * jest v24
 * babel v7
+* bootstrap css v3
 ### Getting Started
 ```sh
 $ git clone https://github.com/bitrecipe/mern-minimal.git
