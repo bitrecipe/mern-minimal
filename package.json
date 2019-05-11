@@ -55,7 +55,7 @@
     "terser-webpack-plugin": "^1.2.3",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "url-loader": "^1.1.2",
-    "webpack": "^4.31.0",
+    "webpack": "^4.28.4",
     "webpack-cli": "^3.3.2",
     "webpack-dev-middleware": "^3.6.2",
     "webpack-hot-middleware": "^2.24.4",
@@ -95,7 +95,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "^1.7.0",
-    "style-loader": "^0.23.1"
+    "style-loader": "^0.23.1",
+    "webpack": "^4.28.4"
   },
   "engines": {
     "node": ">=8"
