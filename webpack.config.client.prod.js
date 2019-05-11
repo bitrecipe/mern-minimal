@@ -132,11 +132,10 @@ module.exports = {
 						comments: /@license/i,
 					},
 					compress: {
-						// remove warnings
-						warnings: false,
 						// Drop console statements
 						drop_console: true
 					},
+					warnings: false
 				}
 			})
 		],
