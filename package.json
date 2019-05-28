@@ -99,7 +99,7 @@
     "webpack": "^4.28.4"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=8.12"
   },
   "engineStrict": true
 }
