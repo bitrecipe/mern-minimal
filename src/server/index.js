@@ -68,7 +68,7 @@ app.use(function (err, req, res, next) {
 });
 
 if (process.env.NODE_ENV == 'development') {
-    app.use("/public", express.static(path.resolve(__dirname, './../../dist'), { maxAge: "10" }));
+    app.use("/public", express.static(path.resolve(__dirname, './../../dist/client'), { maxAge: "10" }));
     app.use("/public", express.static(path.resolve(__dirname, './../../assets'), { maxAge: "10" }));
     var webpack = require('webpack');
     var webpackDevMiddleware = require('webpack-dev-middleware');
@@ -78,7 +78,7 @@ if (process.env.NODE_ENV == 'development') {
     app.use(webpackDevMiddleware(compiler, { noInfo: false, publicPath: webpackClientConfig.output.publicPath }));
     app.use(webpackHotMiddleware(compiler));
 } else {
-    app.use("/public", express.static(path.resolve(__dirname, './../../dist'), { maxAge: "30d" }));
+    app.use("/public", express.static(path.resolve(__dirname, './../../dist/client'), { maxAge: "30d" }));
     app.use("/public", express.static(path.resolve(__dirname, './../../assets'), { maxAge: "30d" }));
 }
 
@@ -151,7 +151,7 @@ app.get("/*", csrfProtection, function (req, res) {
 
             let context = {};
 
-            const statsFile = path.resolve(__dirname, "./../../dist/loadable-stats.json");
+            const statsFile = path.resolve(__dirname, "./../../dist/client/loadable-stats.json");
 
             const extractor = new ChunkExtractor({ statsFile, entrypoints: ["app"] });
 

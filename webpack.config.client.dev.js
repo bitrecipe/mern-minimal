@@ -17,7 +17,7 @@ module.exports = {
 		]
 	},
 	output: {
-		path: path.resolve(__dirname, './dist'),
+		path: path.resolve(__dirname, './dist/client'),
 		filename: "client.bundle.js",
 		chunkFilename: '[name].chunk.js',
 		libraryTarget: 'umd',
