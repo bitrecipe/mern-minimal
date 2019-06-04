@@ -59,7 +59,7 @@ module.exports = {
 			test: /\.woff(2)?(\?[a-z0-9]+)?$/,
 			loader: "url-loader",
 			options: {
-				limit: 10000,
+				limit: 11000,
 				mimetype: 'application/font-woff',
 				fallback: 'file-loader',
 				name: "[name].[ext]"
@@ -68,7 +68,7 @@ module.exports = {
 			test: /\.(ttf|eot)(\?[a-z0-9]+)?$/,
 			loader: "url-loader",
 			options: {
-				limit: 10000,
+				limit: 11000,
 				fallback: 'file-loader',
 				name: "[name].[ext]"
 			}
@@ -76,7 +76,7 @@ module.exports = {
 			test: /\.(jpe?g|gif|png)$/i,
 			loader: 'url-loader',
 			options: {
-				limit: 10000,
+				limit: 11000,
 				fallback: 'file-loader',
 				name: "[name].[ext]"
 			}
@@ -84,7 +84,7 @@ module.exports = {
 			test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
 			loader: 'url-loader',
 			options: {
-				limit: 10000,
+				limit: 11000,
 				fallback: 'file-loader',
 				name: "[name].[ext]"
 			}

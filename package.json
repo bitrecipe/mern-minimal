@@ -37,6 +37,7 @@
     "autoprefixer": "^9.5.1",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-inline-import-data-uri": "^1.0.1",
     "cross-env": "^5.2.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2",

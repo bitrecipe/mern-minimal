@@ -4,7 +4,7 @@ module.exports = function (api) {
 
     const webpack = api.caller((caller) => { return Boolean(caller && caller.name === 'babel-loader'); });
 
-    const presets = [
+    var presets = [
         '@babel/preset-react',
         [
             '@babel/preset-env',
@@ -17,11 +17,22 @@ module.exports = function (api) {
         ],
     ];
 
-    const plugins = [
+    var plugins = [
         "@loadable/babel-plugin",
         "@babel/plugin-proposal-class-properties",
-        "@babel/plugin-proposal-object-rest-spread"
+        "@babel/plugin-proposal-object-rest-spread",
     ];
+
+    if (process.env.NODE_ENV != "production") {
+        plugins.push(["inline-import-data-uri", {
+          "extensions": [
+            ".svg",
+            ".png",
+            ".jpeg",
+            ".jpg"
+          ]
+        }]);
+    }
 
     return {
         presets,
