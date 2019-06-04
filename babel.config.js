@@ -1,4 +1,4 @@
-module.exports = function (api) {
+module.exports = function(api) {
 
     const web = api.caller((caller) => { return Boolean(caller && caller.target == 'web'); });
 
@@ -20,17 +20,21 @@ module.exports = function (api) {
     var plugins = [
         "@loadable/babel-plugin",
         "@babel/plugin-proposal-class-properties",
-        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-proposal-object-rest-spread"
     ];
 
     if (process.env.NODE_ENV != "production") {
+        if (!web) {
+            plugins.push(["dynamic-import-node", { noInterop: true }]);
+        }
+
         plugins.push(["inline-import-data-uri", {
-          "extensions": [
-            ".svg",
-            ".png",
-            ".jpeg",
-            ".jpg"
-          ]
+            "extensions": [
+                ".svg",
+                ".png",
+                ".jpeg",
+                ".jpg"
+            ]
         }]);
     }
 
