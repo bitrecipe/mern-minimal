@@ -11,7 +11,7 @@ const _LoginForm = props => {
             <label htmlFor="inputEmail" className="sr-only">Email address</label>
             <Field name="email" component="input" type="text" placeholder="Email address" id="inputEmail" className="form-control" />
             <label htmlFor="inputPassword" className="sr-only">Password</label>
-            <Field name="password" component="input" type="text" placeholder="Password" id="inputPassword" className="form-control" />
+            <Field name="password" component="input" type="password" placeholder="Password" id="inputPassword" className="form-control" />
             <div className="checkbox">
                 <label>
                     <Link to="/signup">signup</Link>
