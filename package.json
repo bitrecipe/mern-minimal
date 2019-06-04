@@ -6,6 +6,9 @@
   "sideEffects": [
     "*.css"
   ],
+  "browserslist": [
+    "last 3 versions"
+  ],
   "scripts": {
     "clean:dist": "shx rm -rf ./dist",
     "start:dev": "npm run clean:dist && cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon ./index.js",
