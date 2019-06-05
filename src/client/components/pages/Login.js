@@ -7,7 +7,7 @@ const _LoginForm = props => {
     const { handleSubmit, pristine, submitting, login } = props
     return (
         <form className="form-signin" onSubmit={handleSubmit(login)}>
-            <h2 className="form-signin-heading">Please sign in (signup first)</h2>
+            <h2 className="form-signin-heading">signin (signup first)</h2>
             <label htmlFor="inputEmail" className="sr-only">Email address</label>
             <Field name="email" component="input" type="text" placeholder="Email address" id="inputEmail" className="form-control" />
             <label htmlFor="inputPassword" className="sr-only">Password</label>

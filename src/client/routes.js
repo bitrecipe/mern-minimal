@@ -9,12 +9,12 @@ const Login = loadable(() => import("./components/pages/Login.js"));
 const Signup = loadable(() => import("./components/pages/Signup.js"));
 const ErrorPage = loadable(() => import("./components/pages/ErrorPage.js"));
 
-const routes = [
-    {
+function createRoutes(store) {
+
+    var routes = [{
         path: "/",
         component: AppWrapper,
-        routes: [
-            {
+        routes: [{
                 path: "/",
                 exact: true,
                 component: () => <Redirect to="/dashboard" />
@@ -30,13 +30,11 @@ const routes = [
             {
                 path: "/dashboard",
                 component: Dashboard,
-                routes: [
-                    {
-                        path: "/dashboard",
-                        exact: true,
-                        component: Home
-                    }
-                ]
+                routes: [{
+                    path: "/dashboard",
+                    exact: true,
+                    component: Home
+                }]
             },
             {
                 path: "/error/:code",
@@ -44,7 +42,9 @@ const routes = [
                 component: ErrorPage
             }
         ]
-    }
-];
+    }];
 
-export default routes;
+    return routes;
+}
+
+export default createRoutes;

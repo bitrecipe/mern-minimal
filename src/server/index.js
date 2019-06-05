@@ -12,7 +12,7 @@ import { renderToString } from 'react-dom/server';
 import compression from "compression";
 import App from "./../client/App.js";
 import { configureStore } from './../client/store.js';
-import routes from "./../client/routes.js";
+import createRoutes from "./../client/routes.js";
 import { ChunkExtractor } from '@loadable/server';
 import mongoose from 'mongoose';
 import axios from "axios";
@@ -130,7 +130,7 @@ app.get("/*", csrfProtection, function (req, res) {
 
         const store = configureStore(initStore);
 
-        const branch = matchRoutes(routes, req.path);
+        const branch = matchRoutes(createRoutes(store), req.path);
 
         if (serverConfig.cookie.domain) {
             res.cookie('_csrf_token', req.csrfToken(), { domain: serverConfig.cookie.domain, expires: new Date(new Date().getTime() + (serverConfig.csrf.expiry * 1000)) });
@@ -219,7 +219,7 @@ function renderFullPage(html, preloadedState, extractor) {
     <html>
       <head>
 
-        <title>React SSR</title>
+        <title>mern-minimal</title>
 
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
