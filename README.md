@@ -1,6 +1,6 @@
 # mern-minimal
 
-A simple MongoDB Express.js React.js Node.js universal(isomorphic) mern starter kit with code splitting + hot reloading.
+A simple MongoDB Express.js React.js Node.js universal (isomorphic) mern-starter-kit with code splitting + hot reloading.
 
 ![](mern-minimal.gif)
 
