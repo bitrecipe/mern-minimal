@@ -1,5 +1,6 @@
 # mern-minimal
 A simple MongoDB Express.js React.js Node.js (MERN) universal starter kit with code splitting + hot reloading.
+![](mern-minimal.gif)
 ## Requirement
   - Node.js v8.12+
   - MongoDB v3+
