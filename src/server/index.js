@@ -226,7 +226,9 @@ function renderFullPage(html, preloadedState, extractor) {
 
         <link rel="icon" href="/public/images/favicon.png" type="image/gif" sizes="16x16"/>
 
+        <!--[if IE gt 8]>
         <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=EventSource"></script>
+        <![endif]-->
 
         ${styleTags}
         
