@@ -1,19 +1,9 @@
 {
     "restartable": "rs",
-    "ignore": [
-        ".git",
-        "node_modules/**/node_modules",
-        "src/client/",
-        "sslcert/",
-        "dist/",
-        "assets/"
-    ],
+    "ignore": ["*", "**"],
     "verbose": true,
-    "watch": [
-        "src/server/"
-    ],
+    "watch": false,
     "env": {
         "NODE_ENV": "development"
-    },
-    "ext": "js,json"
+    }
 }
