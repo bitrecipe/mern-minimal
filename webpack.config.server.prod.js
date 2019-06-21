@@ -1,5 +1,10 @@
 var path = require('path');
 var nodeExternals = require('webpack-node-externals');
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+var glob = require('glob');
+var autoprefixer = require('autoprefixer');
+var PurgecssPlugin = require('purgecss-webpack-plugin');
 var mode = process.env.NODE_ENV;
 var target = "node";
 
@@ -29,6 +34,23 @@ module.exports = {
 					}
 				}
 			}
+		}, {
+			test: /\.css$/,
+			use: [
+				MiniCssExtractPlugin.loader,
+				{
+					loader: 'css-loader',
+					options: {
+						importLoaders: 1
+					}
+				},
+				{
+					loader: 'postcss-loader',
+					options: {
+						plugins: () => [autoprefixer()],
+					}
+				},
+			],
 		}, {
 			test: /\.woff(2)?(\?[a-z0-9]+)?$/,
 			loader: "url-loader",
@@ -81,5 +103,24 @@ module.exports = {
 			'node_modules',
 		],
 	},
+
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: "[contenthash:10].css"
+		}),
+		new PurgecssPlugin({
+			paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true }),
+		})
+	],
+
+	optimization: {
+		minimizer: [
+			new OptimizeCSSAssetsPlugin({
+				cssProcessorPluginOptions: {
+					preset: ['default', { discardComments: { removeAll: true } }],
+				}
+			})
+		]
+	}
 
 }

@@ -27,15 +27,6 @@ module.exports = function(api) {
         if (!web) {
             plugins.push(["dynamic-import-node", { noInterop: true }]);
         }
-
-        plugins.push(["inline-import-data-uri", {
-            "extensions": [
-                ".svg",
-                ".png",
-                ".jpeg",
-                ".jpg"
-            ]
-        }]);
     }
 
     return {
