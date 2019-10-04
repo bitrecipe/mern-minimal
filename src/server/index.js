@@ -31,7 +31,7 @@ mongoose.connect(serverConfig.mongodb.url, serverConfig.mongodb.options, functio
         require('./utils/initDB.js');
     } else {
         console.log(err);
-        throw err;
+        process.exit(1);
     }
 });
 
@@ -119,6 +119,8 @@ app.post('/ui/logout', csrfProtection, function (req, res, next) {
 });
 
 app.get("/*", csrfProtection, function (req, res) {
+
+    // console.log(req.ip);
 
     let auth_token = req.cookies.auth_token || null;
 
