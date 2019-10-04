@@ -5,7 +5,6 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var TerserJSPlugin = require("terser-webpack-plugin");
 var autoprefixer = require('autoprefixer');
 var LoadablePlugin = require('@loadable/webpack-plugin');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 var glob = require('glob');
 var PurgecssPlugin = require('purgecss-webpack-plugin');
 var mode = process.env.NODE_ENV;
@@ -13,7 +12,7 @@ var target = "web";
 
 module.exports = {
 
-	devtool: 'hidden-source-map',
+	devtool: 'cheap-source-map',
 
 	entry: {
 		app: [
@@ -118,14 +117,9 @@ module.exports = {
 
 	optimization: {
 		minimizer: [
-			new TerserJSPlugin({}),
-			new OptimizeCSSAssetsPlugin({
-				cssProcessorPluginOptions: {
-					preset: ['default', { discardComments: { removeAll: true } }],
-				}
-			}),
-			new UglifyJsPlugin({
-				uglifyOptions: {
+			new TerserJSPlugin({
+				terserOptions: {
+					warnings: false,
 					output: {
 						comments: /@license/i,
 					},
@@ -133,7 +127,12 @@ module.exports = {
 						// Drop console statements
 						drop_console: true
 					},
-					warnings: false
+				},
+				extractComments: true
+			}),
+			new OptimizeCSSAssetsPlugin({
+				cssProcessorPluginOptions: {
+					preset: ['default', { discardComments: { removeAll: true } }],
 				}
 			})
 		],
