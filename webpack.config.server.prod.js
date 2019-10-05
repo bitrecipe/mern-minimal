@@ -1,6 +1,7 @@
 var path = require('path');
 var nodeExternals = require('webpack-node-externals');
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var TerserJSPlugin = require("terser-webpack-plugin");
 var OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var glob = require('glob');
 var autoprefixer = require('autoprefixer');
@@ -115,6 +116,18 @@ module.exports = {
 
 	optimization: {
 		minimizer: [
+			new TerserJSPlugin({
+				terserOptions: {
+					warnings: false,
+					output: {
+						comments: /@license/i,
+					},
+					compress: {
+						// Drop console statements
+						drop_console: true
+					},
+				}
+			}),
 			new OptimizeCSSAssetsPlugin({
 				cssProcessorPluginOptions: {
 					preset: ['default', { discardComments: { removeAll: true } }],
