@@ -15,6 +15,11 @@ const serverConfig = {
         secretKey: json.cookie.secretKey || "cookie_sign_token",
         expiry: json.cookie.expiry || 432000 // in seconds
     },
+    log: {
+        output: json.log.output || "console, file",
+        level: json.log.level || "info",
+        colorize: json.log.colorize || false
+    },
     csrf: {
         expiry: json.csrf.domain || 3600
     },

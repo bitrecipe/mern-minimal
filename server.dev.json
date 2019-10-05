@@ -7,6 +7,11 @@
         "secretKey": "cookie_sign_token",
 		"expiry": "432000"
     },
+    "log": {
+        "output": "console, file",
+        "level": "info",
+        "colorize": true
+	},
     "csrf": {
         "expiry": "3600"
     },

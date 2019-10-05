@@ -19,7 +19,8 @@ import axios from "axios";
 import serverConfig from "./config.js";
 import csrf from "csurf";
 import serialize from 'serialize-javascript';
-
+import morgan from 'morgan';
+import logger from './middlewares/logger.js';
 import authRoutes from './routes/auth.js';
 import commonRoutes from './routes/common.js';
 
@@ -27,15 +28,17 @@ mongoose.Promise = global.Promise;
 
 mongoose.connect(serverConfig.mongodb.url, serverConfig.mongodb.options, function (err) {
     if (!err) {
-        console.log("mongodb connected to " + serverConfig.mongodb.url);
+        logger.info("mongodb connected to " + serverConfig.mongodb.url);
         require('./utils/initDB.js');
     } else {
-        console.log(err);
+        logger.error(err);
         process.exit(1);
     }
 });
 
 const app = express();
+
+app.use(morgan('short', { "stream": logger.stream }));
 
 app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
@@ -63,7 +66,7 @@ if (serverConfig.cookie.domain) {
 
 app.use(function (err, req, res, next) {
     if (err.code !== 'EBADCSRFTOKEN') return next(err);
-    console.log(err);
+    logger.error(err);
     res.status(403).json({ data: null, error: { subject: "csrf" }, message: "invalid csrf token" });
 });
 
@@ -104,7 +107,7 @@ app.post("/ui/login", csrfProtection, function (req, res) {
         }
         res.json({ data: { authenticated: true, email: _res.data.data.email, token: _res.data.data.token, expiry: _res.data.data.expiry }, error: null, message: null });
     }).catch(function (err) {
-        console.log(err.message);
+        logger.error(err);
         res.status(err.response.status).json({ data: null, error: err.response.data.error, message: err.response.data.message });
     });
 });
@@ -119,8 +122,6 @@ app.post('/ui/logout', csrfProtection, function (req, res, next) {
 });
 
 app.get("/*", csrfProtection, function (req, res) {
-
-    // console.log(req.ip);
 
     let auth_token = req.cookies.auth_token || null;
 
@@ -180,7 +181,7 @@ app.get("/*", csrfProtection, function (req, res) {
             res.end(renderFullPage(reactDom, reduxState, extractor));
 
         }).catch((err) => {
-            console.log(err);
+            logger.error(err);
             return res.status(500).end(err.toString());
         });
     });
@@ -198,7 +199,7 @@ function validateAuthToken(auth_token, _csrf_token, req) {
                     userId: res.data.data.session.userId
                 });
             }).catch(function (err) {
-                console.log(err.message);
+                logger.error(err);
                 resolve(null);
             });
         } else {
@@ -250,5 +251,5 @@ function renderFullPage(html, preloadedState, extractor) {
 }
 
 app.listen(serverConfig.port, serverConfig.host, () => {
-    console.log(`${process.env.NODE_ENV} app listening on port ${serverConfig.port}@${serverConfig.host}`);
+    logger.info(`${process.env.NODE_ENV} app listening on port ${serverConfig.port}@${serverConfig.host}`);
 });
