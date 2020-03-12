@@ -102,6 +102,12 @@ module.exports = {
 	},
 
 	plugins: [
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+				'APP_ENV': JSON.stringify(process.env.APP_ENV)
+			}
+		}),
 		new webpack.HashedModuleIdsPlugin(),
 		new LoadablePlugin({
 			filename: 'loadable-stats.json',

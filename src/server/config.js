@@ -1,8 +1,13 @@
-var json;
+let json;
 
-if (process.env.NODE_ENV == "production") {
+if (process.env.NODE_ENV == 'production' && process.env.APP_ENV == 'production') {
+    console.log("production config server");
     json = require('./../../server.json');
+} else if (process.env.NODE_ENV == 'production' && process.env.APP_ENV == 'staging') {
+    console.log("staging config server");
+    json = require('./../../server.stage.json');
 } else {
+    console.log("dev/test config server");
     json = require('./../../server.dev.json');
 }
 
@@ -27,13 +32,33 @@ const serverConfig = {
         url: json.apiServer.url || "http://localhost:3000"
     },
     mongodb: {
-        url: json.mongodb.url || 'mongodb://localhost:27017/mern-minimal',
-        options: { 
-            poolSize: json.mongodb.poolSize || 10, 
-            useNewUrlParser: true, 
-            useCreateIndex: true 
-        }
-    },
+        url: (function () {
+            let _mongoUrl = json.mongodb.url || 'mongodb://localhost:27017/mern-minimal';
+            _mongoUrl = `${_mongoUrl}?`;
+            if (json.mongodb.user || json.mongodb.pass) {
+                _mongoUrl = `${_mongoUrl}authMechanism=DEFAULT&`;
+            }
+            if (json.mongodb.replicaSet) {
+                _mongoUrl = `${_mongoUrl}readPreference=secondaryPreferred&replicaSet=${json.mongodb.replicaSet}`;
+            }
+            return _mongoUrl;
+        })(),
+        options: (function () {
+            let _mongoOpts = { poolSize: json.mongodb.poolSize || 5, useNewUrlParser: true, useUnifiedTopology: true, ssl: json.mongodb.ssl || false };
+            if (json.mongodb.user || json.mongodb.pass) {
+                _mongoOpts["user"] = json.mongodb.user;
+                _mongoOpts["pass"] = json.mongodb.pass;
+            }
+            if (json.mongodb.ssl) {
+                if (!json.mongodb.sslCA) {
+                    throw new Error("valid ca file required");
+                }
+                _mongoOpts["sslValidate"] = true;
+                _mongoOpts["sslCA"] = [fs.readFileSync(path.resolve(__dirname, `./../../sslcert/mongo_ca.ca-bundle`))];
+            }
+            return _mongoOpts;
+        })()
+    }
 }
 
 module.exports = serverConfig;

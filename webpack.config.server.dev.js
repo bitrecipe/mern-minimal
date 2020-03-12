@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var nodeExternals = require('webpack-node-externals');
 var mode = process.env.NODE_ENV;
@@ -95,6 +96,12 @@ module.exports = {
 	},
 
 	plugins: [
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+				'APP_ENV': JSON.stringify(process.env.APP_ENV)
+			}
+		}),
 		new MiniCssExtractPlugin({
 			filename: 'app.css'
 		})

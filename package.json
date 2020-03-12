@@ -12,10 +12,16 @@
   "scripts": {
     "clean:dist": "shx rm -rf ./dist",
     "start:dev": "npm run clean:dist && cross-env NODE_ENV=development node ./index.js",
-    "start:prod": "cross-env NODE_ENV=production node ./index.js",
-    "build:client": "cross-env NODE_ENV=production webpack --config webpack.config.client.prod.js",
-    "build:server": "cross-env NODE_ENV=production webpack --config webpack.config.server.prod.js",
+    "start:prod": "cross-env NODE_ENV=production APP_ENV=production node ./index.js",
+    "start:stage": "cross-env NODE_ENV=production APP_ENV=staging node ./index.js",
+    "build:client": "cross-env NODE_ENV=production APP_ENV=production webpack --config webpack.config.client.prod.js",
+    "build:server": "cross-env NODE_ENV=production APP_ENV=production webpack --config webpack.config.server.prod.js",
+    "build:client:stage": "cross-env NODE_ENV=production APP_ENV=staging webpack --config webpack.config.client.prod.js",
+    "build:server:stage": "cross-env NODE_ENV=production APP_ENV=staging webpack --config webpack.config.server.prod.js",
     "build:start:prod": "npm run clean:dist && npm run build:client && npm run build:server && npm run start:prod",
+    "build:start:stage": "npm run clean:dist && npm run build:client:stage && npm run build:server:stage && npm run start:stage",
+    "build:prod": "npm run clean:dist && npm run build:client && npm run build:server",
+    "build:stage": "npm run clean:dist && npm run build:client:stage && npm run build:server:stage",
     "client:test": "jest --coverage || true"
   },
   "repository": {
