@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
+var bcrypt = require('bcryptjs');
 import serverConfig from "./../config.js";
 
 export function hashPassword(password) {
